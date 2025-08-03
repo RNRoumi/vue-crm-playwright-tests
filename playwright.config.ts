@@ -40,7 +40,7 @@ export default defineConfig({
   projects: [
     {
       name: 'adminAuth', // этот проект будет выполняться первым
-      testMatch: '**/fixtures/globalSetupForAdmin.ts',
+      testMatch: '**/fixtures/global-setup.admin.ts',
     },
     {
       name: 'chromium',

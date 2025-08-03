@@ -1,7 +1,7 @@
 import {test as base} from '@playwright/test';
 import {MyFixtures} from "../types/fixtures";
-import {AdminPage} from "../../pages/admin/AdminPage";
-import {UserPage} from "../../pages/user/UserPage";
+import {AdminPage} from "../../pages/admin/admin.page";
+import {UserPage} from "../../pages/user/user.page";
 
 
 export const test = base.extend<MyFixtures>({

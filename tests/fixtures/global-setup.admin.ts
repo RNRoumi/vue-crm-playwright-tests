@@ -1,14 +1,17 @@
 import { test as setup } from '../fixtures/pages.fixture';
-import {chromium} from "@playwright/test";
-import * as fs from "fs";
+import { chromium } from "@playwright/test";
+import { fileExists } from "../../utils/exist.utils";
+import {AppConfig} from "../../config/app-config";
 
 setup('Получение Storage у AdminPage', async () => {
     // await adminPage.gotoLoginPage();
     // await adminPage.login();
 
-    const adminSessionPath = process.env.ADMIN_SESSION_FILE_PATH
+    const appConfig = new AppConfig();
 
-    if (fs.existsSync(adminSessionPath)) return;
+    //const adminSessionPath = process.env.ADMIN_SESSION_FILE_PATH
+
+    if (!await fileExists(appConfig.ADMIN_SESSION_FILE_PATH)) return;
 
     const browser = await chromium.launch()
     const context = await browser.newContext()
@@ -21,7 +24,7 @@ setup('Получение Storage у AdminPage', async () => {
     await page.getByRole('button', { name: 'Sign In', exact: true }).click();
     await page.waitForURL('http://localhost:5173/dashboard')
 
-    await page.context().storageState({path: adminSessionPath})
+    await page.context().storageState({path: appConfig.ADMIN_SESSION_FILE_PATH})
 
     console.log('Мы залогинились')
 });
