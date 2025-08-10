@@ -20,6 +20,6 @@ export class AppConfig implements ApplicationConfig {
         this.TEST_TARGET = testTarget;
         this.ADMIN_SESSION_FILE_PATH = adminSessionFilePath;
     }
-
-
 }
+
+export default new AppConfig()

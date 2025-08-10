@@ -1,9 +1,4 @@
-
-interface AppRoutes {
-    login: string,
-    dashboard: string
-}
-export const appRoutes: AppRoutes = {
-    login: '/login',
-    dashboard: '/dashboard',
+export enum AppRoutes {
+    login = 'login',
+    dashboard = 'dashboard'
 }
