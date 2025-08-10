@@ -1,4 +1,3 @@
-import {Page} from "@playwright/test";
 import {AdminPage} from "../../pages/admin/admin.page";
 import {UserPage} from "../../pages/user/user.page";
 
