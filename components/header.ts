@@ -3,16 +3,17 @@ import {Page} from "@playwright/test";
 export class Header {
     protected readonly page: Page
 
+
     constructor(page: Page) {
         this.page = page
     }
 
 ///////
-    get vueDemoMainPage() {
+    get vueDemoMainLogo() {
         return this.page.getByRole('link', {name: 'Vue Demo V3'})
     }
 
-    openVueDemoMainPage = async () => await this.vueDemoMainPage.click()
+    openVueDemoMainLogo = async () => await this.vueDemoMainLogo.click()
 
 //////
     get burgerButton() {
@@ -32,6 +33,12 @@ export class Header {
         await this.gitHubButton.click();
     }
 
+    async openGitHubPopUp () {
+        const [newPage] = await  Promise.all([
+            this.page.waitForEvent("popup") , this.openGitHubButton()]
+        )
+        return newPage;
+    }
 //////
     get notificationsButton() {
         return this.page.getByRole('button').filter({has: this.page.locator('.icon-tabler.icon-tabler-bell')})

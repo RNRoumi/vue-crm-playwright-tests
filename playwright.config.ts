@@ -46,7 +46,7 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'], storageState: process.env.ADMIN_SESSION_FILE_PATH },
       dependencies: ['adminAuth'],
-      testMatch: '**/tests/*spec.ts'
+      testMatch: '**/tests/**/*spec.ts'
     }
 
     // {

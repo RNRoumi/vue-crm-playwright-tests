@@ -11,7 +11,7 @@ test.describe('Тест набор для пользователя с ролью
     })
 
     test('Проверка Лого кнопки', async ({adminPage}) => {
-        await adminPage.header.openVueDemoMainPage()
+        await adminPage.header.openVueDemoMainLogo()
     })
 
     test('Проверка Бургера кнопки', async () => {
