@@ -6,7 +6,7 @@ import {AppRoutes} from "../../config/app-routes";
 
 setup('Получение Storage у AdminPage', async () => {
 
-    if (!await fileExists(appConfig.ADMIN_SESSION_FILE_PATH)) return;
+    if (await fileExists(appConfig.ADMIN_SESSION_FILE_PATH)) return;
 
     const browser = await chromium.launch()
     const context = await browser.newContext()

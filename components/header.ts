@@ -1,11 +1,13 @@
 import {Page} from "@playwright/test";
+import {NotificationMenu} from "./notification-menu";
 
 export class Header {
     protected readonly page: Page
+    public readonly notificationMenu: NotificationMenu
 
-
-    constructor(page: Page) {
+    constructor(page: Page ) {
         this.page = page
+        this.notificationMenu = new NotificationMenu(page)
     }
 
 ///////
@@ -41,16 +43,17 @@ export class Header {
     }
 //////
     get notificationsButton() {
-        return this.page.getByRole('button').filter({has: this.page.locator('.icon-tabler.icon-tabler-bell')})
+        return this.page.getByRole('button').nth(2)
     }
 
     async openNotificationsButton() {
         await this.notificationsButton.click();
     }
 
+
 //////
     get profileButton() {
-        return this.page.getByRole('button').filter({has: this.page.locator('.icon-tabler.icon-tabler-settings')})
+        return this.page.locator('#app > div > div > div > header > div > button.v-btn.v-theme--PurpleTheme.bg-lightprimary.v-btn--density-default.rounded-pill.v-btn--size-default.v-btn--variant-flat.profileBtn.text-primary')
     }
 
     async clickProfileButton() {

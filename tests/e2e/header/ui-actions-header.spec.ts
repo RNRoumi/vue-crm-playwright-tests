@@ -37,7 +37,7 @@ test.describe('@header UI-actions', async () => {
     })
 
     test('Бургер-меню при наведении меняет подсветку', async ({adminPage}) => {
-        const result = await toMeasureOverlayChanging(adminPage,adminPage.header.burgerButton,"v-btn__overlay" )
+        const result = await toMeasureOverlayChanging(adminPage,adminPage.header.burgerButton )
         expect(result).toBeGreaterThan(0);
 
         //await adminPage.header.burgerButton.hover()
@@ -49,10 +49,14 @@ test.describe('@header UI-actions', async () => {
         //     expect(overlayMeasure).toBeGreaterThan(0);
     })
 
-    test('Иконка нотификаций при наведении меняет подсветку', async () => {
+    test('Иконка нотификаций при наведении меняет подсветку', async ({adminPage}) => {
+        const result = await toMeasureOverlayChanging(adminPage,adminPage.header.notificationsButton)
+        expect(result).toBeGreaterThan(0);
     })
 
-    test('Профиль-меню при наведении меняет подсветку', async () => {
+    test('Профиль-меню при наведении меняет подсветку', async ({adminPage}) => {
+        const result = await toMeasureOverlayChanging(adminPage,adminPage.header.profileButton)
+        expect(result).toBeGreaterThan(0);
     })
 
 })

@@ -7,3 +7,4 @@ node_modules/
 /playwright/.cache/
 /.auth/
 /tests/_scratch
+/.env
