@@ -13,6 +13,7 @@ export abstract class BasePage {
 
 
 
+
     protected constructor(page: Page) {
         this.page = page;
         //Забираем сигнатуру стандартногор Локатора и проксируем, для переиспользования

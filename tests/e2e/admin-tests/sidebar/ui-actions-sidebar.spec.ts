@@ -1,5 +1,4 @@
-import {test} from "../../fixtures/pages.fixture";
-
+import {test} from "../../../fixtures/pages.fixture";
 
 
 test.describe('@header UI-actions', async () => {

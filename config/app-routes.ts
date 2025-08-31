@@ -1,4 +1,6 @@
 export enum AppRoutes {
     login = 'login',
-    dashboard = 'dashboard'
+    dashboard = 'dashboard',
+    customer = 'customer',
+    newCustomer = 'new'
 }

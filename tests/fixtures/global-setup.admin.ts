@@ -1,10 +1,10 @@
-import { test as setup } from '../fixtures/pages.fixture';
-import { chromium } from "@playwright/test";
-import { fileExists } from "../../utils/exist.utils";
+import {test as setup} from '../fixtures/pages.fixture';
+import {chromium} from "@playwright/test";
+import {fileExists} from "../../utils/exist.utils";
 import appConfig from "../../config/app-config";
 import {AppRoutes} from "../../config/app-routes";
 
-setup('Получение Storage у AdminPage', async () => {
+setup('Получение Storage у DashboardPage', async () => {
 
     if (await fileExists(appConfig.ADMIN_SESSION_FILE_PATH)) return;
 

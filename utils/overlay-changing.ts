@@ -1,29 +1,31 @@
 import {Locator} from "@playwright/test";
-import {AdminPage} from "../pages/admin/admin.page";
+import {DashboardPage} from "../pages/admin/dashboard/dashboard.page";
 
-export const toMeasureOverlayChanging = async <T extends AdminPage>(page: T, locator: Locator) => {
+export const toMeasureOverlayChanging = async <T extends DashboardPage>(page: T, locator: Locator) => {
     await locator.hover()
-     const result = await locator.locator('.v-btn__overlay').evaluate((element) => {
+     const result = await locator.evaluate((element) => {
         return parseFloat(getComputedStyle(element).opacity)
     });
     console.log(`Время opacity у элемента равно: ${result}`)
     return result
 
-    // const element = locator.evaluate((_,selector ) => {
-    //     const arrayOfElements = document.getElementsByClassName(selector) //[0];
-    //     return parseFloat(getComputedStyle(arrayOfElements[0]).opacity)
-    // }, selector)
-    // console.log(`Время opacity равно: ${await element}`)
-    // return await element;
+    // await locator.hover()
+    // const result = await locator.locator('.v-btn__overlay').evaluate((element) => {
+    //     return parseFloat(getComputedStyle(element).opacity)
+    // });
+    // console.log(`Время opacity у элемента равно: ${result}`)
+    // return result
+}
+
+export const toMeasureSelectorOverlayChanging = async <T extends DashboardPage>(page: T, locator: Locator) => {
+    await locator.hover()
+    const result = await locator.evaluate((element) => {
+        return parseFloat(getComputedStyle(element).opacity)
+    });
+    console.log(`Время opacity у элемента равно: ${result}`)
+    return result
 }
 
 
-// export const toMeasureOverlayChanging = async <T extends AdminPage>(page: T, locator: Locator, selector: string) => {
-//     await locator.hover()
-//     const element = locator.evaluate((_,selector ) => {
-//         const arrayOfElements = document.getElementsByClassName(selector) //[0];
-//         return parseFloat(getComputedStyle(arrayOfElements[0]).opacity)
-//     }, selector)
-//     console.log(`Время opacity равно: ${await element}`)
-//     return await element;
-// }
+
+

@@ -1,8 +1,9 @@
-import {AdminPage} from "../../pages/admin/admin.page";
-import {UserPage} from "../../pages/user/user.page";
+import {Scenarios} from "../mocks";
+import {Page} from "@playwright/test";
 
 
 export type MyFixtures = {
-    userPage: UserPage;
-    adminPage: AdminPage;
+    userContext: Page;
+    adminContext: Page;
+    mockProfile: Scenarios
 }
