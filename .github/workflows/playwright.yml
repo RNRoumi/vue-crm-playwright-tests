@@ -37,7 +37,7 @@ jobs:
       - name: Install & build frontend
         working-directory: frontend
         run: |
-          npm ci
+          npm install --no-audit --fund=false
           npm run build
           # стартуем предпросмотр Vite на 5173 (по умолчанию)
           npm run preview -- --host --port 5173 &
