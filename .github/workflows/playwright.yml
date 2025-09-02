@@ -32,7 +32,7 @@ jobs:
       - name: update problem dependency
         working-directory: frontend
         run: |
-          npm pkg set "overrides.webpack-plugin-vuetify=^3.1.1"
+          npm pkg set "webpack-plugin-vuetify=^3.1.1"
           cat package.json
       - name: Install & build frontend
         working-directory: frontend
