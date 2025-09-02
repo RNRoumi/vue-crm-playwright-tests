@@ -12,18 +12,18 @@ test.describe('@header UI-actions', async () => {
         dashboardPage = new DashboardPage(adminContext)
         await dashboardPage.gotoMainPage();
     })
-    test('Кнопки хедера на своих местах', async ({adminContext}) => {
+    test('Кнопки хедера на своих местах', async () => {
         await expect(dashboardPage.header.vueDemoMainLogo).toBeVisible()
         await expect(dashboardPage.header.burgerButton).toBeVisible()
         await expect(dashboardPage.header.gitHubButton).toBeVisible()
         await expect(dashboardPage.header.notificationsButton).toBeVisible()
         await expect(dashboardPage.header.profileButton).toBeVisible()
     })
-    test('Цвет темы белый', async ({adminContext}) => {
+    test('Цвет темы белый', async () => {
         await themeValidator(ValidatedElement.header, AppThemes.classic, dashboardPage)
     })
 
-    test('Клик по Бургер-меню сворачивает/разворачивает сайдбар', async ({adminContext}) => {
+    test('Клик по Бургер-меню сворачивает/разворачивает сайдбар', async () => {
         await test.step('Бургер виден', async () => {
             await expect(dashboardPage.header.burgerButton).toBeVisible()
         })
@@ -39,7 +39,7 @@ test.describe('@header UI-actions', async () => {
         })
     })
 
-    test('Бургер-меню при наведении меняет подсветку', async ({adminContext}) => {
+    test('Бургер-меню при наведении меняет подсветку', async () => {
         const result = await toMeasureOverlayChanging(dashboardPage,dashboardPage.header.burgerButton )
         expect(result).toBeGreaterThan(0);
 
@@ -52,12 +52,12 @@ test.describe('@header UI-actions', async () => {
         //     expect(overlayMeasure).toBeGreaterThan(0);
     })
 
-    test('Иконка нотификаций при наведении меняет подсветку', async ({adminContext}) => {
+    test('Иконка нотификаций при наведении меняет подсветку', async () => {
         const result = await toMeasureOverlayChanging(dashboardPage,dashboardPage.header.notificationsButton)
         expect(result).toBeGreaterThan(0);
     })
 
-    test('Профиль-меню при наведении меняет подсветку', async ({adminContext}) => {
+    test('Профиль-меню при наведении меняет подсветку', async () => {
         const result = await toMeasureOverlayChanging(dashboardPage,dashboardPage.header.profileButton)
         expect(result).toBeGreaterThan(0);
     })
