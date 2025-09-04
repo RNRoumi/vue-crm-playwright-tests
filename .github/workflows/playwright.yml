@@ -29,17 +29,21 @@ jobs:
         with:
           repository: harryho/vue-crm
           path: frontend
-
       - name: update problem dependency
         working-directory: frontend
         run: |
-          npm pkg set "overrides.webpack-plugin-vuetify=^2.1.2"
-          cat package.json
-
+             # правим package.json в рабочей копии
+              npm pkg set "dependencies.vite-plugin-vuetify"="2.1.2"
+              # на всякий — убираем несовместимый webpack-плагин, если он есть
+              npm pkg delete "dependencies.webpack-plugin-vuetify" || true
+              npm pkg delete "devDependencies.sass-loader" || true
+              # пересобираем локфайл под обновлённые зависимости
+              rm -f package-lock.json
+              npm install --no-audit --fund=false
       - name: Install & build frontend
         working-directory: frontend
         run: |
-          npm ci
+          npm install --no-audit --fund=false
           npm run build
           # стартуем предпросмотр Vite на 5173 (по умолчанию)
           npm run preview -- --host --port 5173 &
