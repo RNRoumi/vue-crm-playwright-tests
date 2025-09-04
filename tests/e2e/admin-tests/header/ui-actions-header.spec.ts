@@ -12,34 +12,33 @@ test.describe('@header UI-actions', async () => {
         dashboardPage = new DashboardPage(adminContext)
         await dashboardPage.gotoMainPage();
     })
-    test('Кнопки хедера на своих местах', async ({adminContext}) => {
+    test('Кнопки хедера на своих местах', async () => {
         await expect(dashboardPage.header.vueDemoMainLogo).toBeVisible()
         await expect(dashboardPage.header.burgerButton).toBeVisible()
         await expect(dashboardPage.header.gitHubButton).toBeVisible()
         await expect(dashboardPage.header.notificationsButton).toBeVisible()
         await expect(dashboardPage.header.profileButton).toBeVisible()
     })
-    test('Цвет темы белый', async ({adminContext}) => {
+    test('Цвет темы белый', async () => {
         await themeValidator(ValidatedElement.header, AppThemes.classic, dashboardPage)
     })
 
-    test('Клик по Бургер-меню сворачивает/разворачивает сайдбар', async ({adminContext}) => {
+    test('Клик по Бургер-меню сворачивает/разворачивает сайдбар', async () => {
         await test.step('Бургер виден', async () => {
             await expect(dashboardPage.header.burgerButton).toBeVisible()
         })
-        await test.step('Кликаем по бургеру', async () => {
-            await dashboardPage.header.burgerButton.click()
+        await test.step('Проверяем первоначальную ширину сайдбара до клика', async () => {
+            const sidebarLocator = dashboardPage.sidebar.sidebarLocator;
+            await expect(sidebarLocator).toHaveCSS('width', '256px');
         })
-        await test.step('Проверяем, что сайдбар свернулся', async () => {
-            const res = await dashboardPage.evaluate(() => {
-                return document.querySelector('#app > div > div > div > nav > div').getBoundingClientRect().width
-                //Number(getComputedStyle(sel).width.split('px')[0])
-            })
-            expect(res).toBeCloseTo(75); //await expect(locNav).toHaveCSS('width', '75px'); // авто-поллинг до таймаута
+        await test.step('Кликаем по бургеру и проверяем что сайдбар свернулся', async () => {
+            await dashboardPage.header.openBurgerButton() // подправьте селектор под ваш
+            const sidebarLocator = dashboardPage.sidebar.sidebarLocator;
+            await expect(sidebarLocator).toHaveCSS('width', '75px');
         })
     })
 
-    test('Бургер-меню при наведении меняет подсветку', async ({adminContext}) => {
+    test('Бургер-меню при наведении меняет подсветку', async () => {
         const result = await toMeasureOverlayChanging(dashboardPage,dashboardPage.header.burgerButton )
         expect(result).toBeGreaterThan(0);
 
@@ -52,12 +51,12 @@ test.describe('@header UI-actions', async () => {
         //     expect(overlayMeasure).toBeGreaterThan(0);
     })
 
-    test('Иконка нотификаций при наведении меняет подсветку', async ({adminContext}) => {
+    test('Иконка нотификаций при наведении меняет подсветку', async () => {
         const result = await toMeasureOverlayChanging(dashboardPage,dashboardPage.header.notificationsButton)
         expect(result).toBeGreaterThan(0);
     })
 
-    test('Профиль-меню при наведении меняет подсветку', async ({adminContext}) => {
+    test('Профиль-меню при наведении меняет подсветку', async () => {
         const result = await toMeasureOverlayChanging(dashboardPage,dashboardPage.header.profileButton)
         expect(result).toBeGreaterThan(0);
     })

@@ -6,7 +6,7 @@ test.describe('@header Тест набор для пользователя с р
 
     test.beforeEach(async ({adminContext}) => {
         await test.step('Идем на главную страницу', async () => {
-            const dashboardPage = new DashboardPage(adminContext)
+            dashboardPage = new DashboardPage(adminContext)
             await dashboardPage.gotoMainPage();
         })
     })

@@ -7,7 +7,7 @@ export class Sidebar {
     }
 ///////
     get sidebarLocator(){
-        return this.page.locator('#app > div > div > div > nav')
+        return this.page.locator('#app > div > div > div > nav > div')
     }
     get dashboardLink(){
         return this.page.getByRole('link', { name: 'Dashboard' });
