@@ -6,6 +6,9 @@ export class Sidebar {
         this.page = page
     }
 ///////
+    get sidebarLocator(){
+        return this.page.locator('#app > div > div > div > nav > div')
+    }
     get dashboardLink(){
         return this.page.getByRole('link', { name: 'Dashboard' });
     }
@@ -26,8 +29,8 @@ export class Sidebar {
     async openProductsLink(){
         await this.productsLink.click();
     }
-///////
 
+///////
     get blogLink(){
         return this.page.getByRole('link', { name: 'Blog' })
     }
@@ -38,6 +41,7 @@ export class Sidebar {
     get orderLink(){
         return this.page.getByRole('link', { name: 'Order' })
     }
+
     async gotoOrderLink(){
         await this.orderLink.click();
     }

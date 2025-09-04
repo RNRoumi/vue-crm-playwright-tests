@@ -1,18 +1,22 @@
 import {Page} from "@playwright/test";
+import {NotificationMenu} from "./notification-menu";
 
 export class Header {
     protected readonly page: Page
+    public readonly notificationMenu: NotificationMenu
 
     constructor(page: Page) {
         this.page = page
+        this.notificationMenu = new NotificationMenu(page)
     }
 
 ///////
-    get vueDemoMainPage() {
+    get vueDemoMainLogo() {
         return this.page.getByRole('link', {name: 'Vue Demo V3'})
     }
 
-    openVueDemoMainPage = async () => await this.vueDemoMainPage.click()
+    openVueDemoMainLogo = async () => await this.vueDemoMainLogo.click()
+
 
 //////
     get burgerButton() {
@@ -32,18 +36,26 @@ export class Header {
         await this.gitHubButton.click();
     }
 
+    async openGitHubPopUp() {
+        const [newPage] = await Promise.all([
+            this.page.waitForEvent("popup"), this.openGitHubButton()]
+        )
+        return newPage;
+    }
+
 //////
     get notificationsButton() {
-        return this.page.getByRole('button').filter({has: this.page.locator('.icon-tabler.icon-tabler-bell')})
+        return this.page.getByRole('button').nth(2)
     }
 
     async openNotificationsButton() {
         await this.notificationsButton.click();
     }
 
+
 //////
     get profileButton() {
-        return this.page.getByRole('button').filter({has: this.page.locator('.icon-tabler.icon-tabler-settings')})
+        return this.page.locator('#app > div > div > div > header > div > button.v-btn.v-theme--PurpleTheme.bg-lightprimary.v-btn--density-default.rounded-pill.v-btn--size-default.v-btn--variant-flat.profileBtn.text-primary')
     }
 
     async clickProfileButton() {
@@ -91,7 +103,7 @@ export class Header {
         return this.page.getByText('Logout')
     }
 
-    async profileLogoutClick(){
+    async profileLogoutClick() {
         await this.profileLogoutButton.click()
     }
 

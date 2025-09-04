@@ -1,0 +1,64 @@
+import {test} from "../../../fixtures/pages.fixture";
+import {expect} from "@playwright/test";
+import {themeValidator} from "../../../../utils/theme-validator.utils";
+import {AppThemes, ValidatedElement} from "../../../../config/app-themes";
+import {toMeasureOverlayChanging} from "../../../../utils/overlay-changing";
+import {DashboardPage} from "../../../../pages/admin/dashboard/dashboard.page";
+
+
+test.describe('@header UI-actions', async () => {
+    let dashboardPage: DashboardPage;
+    test.beforeEach(async ({adminContext}) => {
+        dashboardPage = new DashboardPage(adminContext)
+        await dashboardPage.gotoMainPage();
+    })
+    test('Кнопки хедера на своих местах', async () => {
+        await expect(dashboardPage.header.vueDemoMainLogo).toBeVisible()
+        await expect(dashboardPage.header.burgerButton).toBeVisible()
+        await expect(dashboardPage.header.gitHubButton).toBeVisible()
+        await expect(dashboardPage.header.notificationsButton).toBeVisible()
+        await expect(dashboardPage.header.profileButton).toBeVisible()
+    })
+    test('Цвет темы белый', async () => {
+        await themeValidator(ValidatedElement.header, AppThemes.classic, dashboardPage)
+    })
+
+    test('Клик по Бургер-меню сворачивает/разворачивает сайдбар', async () => {
+        await test.step('Бургер виден', async () => {
+            await expect(dashboardPage.header.burgerButton).toBeVisible()
+        })
+        await test.step('Проверяем первоначальную ширину сайдбара до клика', async () => {
+            const sidebarLocator = dashboardPage.sidebar.sidebarLocator;
+            await expect(sidebarLocator).toHaveCSS('width', '256px');
+        })
+        await test.step('Кликаем по бургеру и проверяем что сайдбар свернулся', async () => {
+            await dashboardPage.header.openBurgerButton() // подправьте селектор под ваш
+            const sidebarLocator = dashboardPage.sidebar.sidebarLocator;
+            await expect(sidebarLocator).toHaveCSS('width', '75px');
+        })
+    })
+
+    test('Бургер-меню при наведении меняет подсветку', async () => {
+        const result = await toMeasureOverlayChanging(dashboardPage,dashboardPage.header.burgerButton )
+        expect(result).toBeGreaterThan(0);
+
+        //await adminContext.header.burgerButton.hover()
+        //     const element = adminContext.header.burgerButton.evaluate( () => {
+        //         const arrayOfElements = document.getElementsByClassName("v-btn__overlay") //[0];
+        //         return parseFloat(getComputedStyle(arrayOfElements[0]).opacity)
+        //     })
+        //     const overlayMeasure = await element;
+        //     expect(overlayMeasure).toBeGreaterThan(0);
+    })
+
+    test('Иконка нотификаций при наведении меняет подсветку', async () => {
+        const result = await toMeasureOverlayChanging(dashboardPage,dashboardPage.header.notificationsButton)
+        expect(result).toBeGreaterThan(0);
+    })
+
+    test('Профиль-меню при наведении меняет подсветку', async () => {
+        const result = await toMeasureOverlayChanging(dashboardPage,dashboardPage.header.profileButton)
+        expect(result).toBeGreaterThan(0);
+    })
+
+})
