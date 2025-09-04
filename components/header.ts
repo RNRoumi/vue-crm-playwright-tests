@@ -5,7 +5,7 @@ export class Header {
     protected readonly page: Page
     public readonly notificationMenu: NotificationMenu
 
-    constructor(page: Page ) {
+    constructor(page: Page) {
         this.page = page
         this.notificationMenu = new NotificationMenu(page)
     }
@@ -16,6 +16,7 @@ export class Header {
     }
 
     openVueDemoMainLogo = async () => await this.vueDemoMainLogo.click()
+
 
 //////
     get burgerButton() {
@@ -35,12 +36,13 @@ export class Header {
         await this.gitHubButton.click();
     }
 
-    async openGitHubPopUp () {
-        const [newPage] = await  Promise.all([
-            this.page.waitForEvent("popup") , this.openGitHubButton()]
+    async openGitHubPopUp() {
+        const [newPage] = await Promise.all([
+            this.page.waitForEvent("popup"), this.openGitHubButton()]
         )
         return newPage;
     }
+
 //////
     get notificationsButton() {
         return this.page.getByRole('button').nth(2)
@@ -101,7 +103,7 @@ export class Header {
         return this.page.getByText('Logout')
     }
 
-    async profileLogoutClick(){
+    async profileLogoutClick() {
         await this.profileLogoutButton.click()
     }
 

@@ -27,15 +27,14 @@ test.describe('@header UI-actions', async () => {
         await test.step('Бургер виден', async () => {
             await expect(dashboardPage.header.burgerButton).toBeVisible()
         })
-        await test.step('Кликаем по бургеру', async () => {
-            await dashboardPage.header.burgerButton.click()
+        await test.step('Проверяем первоначальную ширину сайдбара до клика', async () => {
+            const sidebarLocator = dashboardPage.sidebar.sidebarLocator;
+            await expect(sidebarLocator).toHaveCSS('width', '256px');
         })
-        await test.step('Проверяем, что сайдбар свернулся', async () => {
-            const res = await dashboardPage.evaluate(() => {
-                return document.querySelector('#app > div > div > div > nav > div').getBoundingClientRect().width
-                //Number(getComputedStyle(sel).width.split('px')[0])
-            })
-            expect(res).toBeCloseTo(75); //await expect(locNav).toHaveCSS('width', '75px'); // авто-поллинг до таймаута
+        await test.step('Кликаем по бургеру и проверяем что сайдбар свернулся', async () => {
+            await dashboardPage.header.openBurgerButton() // подправьте селектор под ваш
+            const sidebarLocator = dashboardPage.sidebar.sidebarLocator;
+            await expect(sidebarLocator).toHaveCSS('width', '75px');
         })
     })
 

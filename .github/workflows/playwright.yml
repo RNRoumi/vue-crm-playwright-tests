@@ -29,11 +29,13 @@ jobs:
         with:
           repository: harryho/vue-crm
           path: frontend
+
       - name: update problem dependency
         working-directory: frontend
         run: |
-          npm pkg set "overrides.vite-plugin-vuetify=^2.1.2"
+          npm pkg set "overrides.webpack-plugin-vuetify=^2.1.2"
           cat package.json
+
       - name: Install & build frontend
         working-directory: frontend
         run: |

@@ -7,7 +7,7 @@ import appConfig from "../../../../config/app-config";
 test.describe('@header external links', () => {
     let dashboardPage: DashboardPage;
     test.beforeEach(async ({adminContext}) => {
-        const dashboardPage = new DashboardPage(adminContext)
+        dashboardPage = new DashboardPage(adminContext)
         await dashboardPage.gotoMainPage();
     })
     test('Проверка Лого кнопки', async ({adminContext}) => {
